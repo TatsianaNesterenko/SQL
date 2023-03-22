@@ -42,15 +42,13 @@ select employee_name, salary.monthly_salary  from employees
    					from employee_salary
    				);
    	
-   -- !!!!!!!!!!!!!!!!!!!!!!!!!Проверить работу (работает не так)
-   	
-   	 select salary.monthly_salary	
-  	from salary
-  		left join employee_salary
-  			on salary.id = employee_salary.salary_id 
-  		left join employees
-  			on employees.id = employee_salary.employee_id 
-  				where employee_name is null;
+   -- !!!!!!!!!!!!!!!!!!!!!!!!!(Работает так???)
+   			
+   	select salary.monthly_salary, employee_salary.employee_id  
+   		from salary
+			left join employee_salary
+				on salary.id = employee_salary.salary_id
+				where employee_salary.employee_id is null;
  
  -- 4. Вывести все зарплатные позиции  меньше 2000 но работник по ним не назначен. (ЗП есть, но не понятно кто её получает.)
  
@@ -63,15 +61,12 @@ select employee_name, salary.monthly_salary  from employees
    	from salary 
    		where monthly_salary < 2000 and id not in (select salary_id from employee_salary);
    	
-   	-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Вариант с JOIN (работает не так)
+   	-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Вариант с JOIN (работает так?)
    	
-   	select employee_name, salary.monthly_salary from salary
-	left join employee_salary
-	on salary.id = employee_salary.salary_id
-	left join employees
-	on employees.id = employee_salary.employee_id
-		where salary.monthly_salary<2000 and employee_name is null;
- 
+   	select salary.monthly_salary,  from salary
+		left join employee_salary
+			on salary.id = employee_salary.salary_id
+			where salary.monthly_salary < 2000 and employee_salary.employee_id is null;
 	
  -- 5. Найти всех работников кому не начислена ЗП.
  
