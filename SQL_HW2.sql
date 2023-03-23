@@ -3,7 +3,7 @@ select *
 from students;
 
 -- 2. Вывести всех студентов в таблице
-select name 
+select *
 from students;
 
 -- 3. Вывести только Id пользователей
